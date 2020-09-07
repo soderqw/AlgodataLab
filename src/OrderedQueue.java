@@ -54,18 +54,35 @@ public class OrderedQueue {
                 return;
             }
 
-            //Iterating ->
+            //Checking if we should continue iterating or not
             if (current.next.item < input.item) {
+                //Iterating ->
                 current = current.next;
             } else {
+                /*
+                * Example of breaking, inserting [2] into List: [1], [3]
+                *
+                *   [1]     ,    [3]
+                *    |            |
+                *  current      current.next
+                *
+                * current.next.item = 3
+                * input.item = 2
+                *
+                * At this point we know 2 is bigger than 1 (Because we could enter the while loop),
+                * and smaller than 3 (because we are in this else statement),
+                * so we can break and insert.
+                * */
                 break;
             }
         }
 
+        /*
+        * Inserting here
+        * */
         input.next = current.next;
         current.next = input;
         n++;
-
     }
 
     public void dequeueFront() {
@@ -140,12 +157,16 @@ public class OrderedQueue {
                     break;
 
                 case (2):
-                    if (list.n == 0) { break; }
+                    if (list.n == 0) {
+                        break;
+                    }
                     list.dequeueFront();
                     break;
 
                 case (3):
-                    if (list.n == 0) { break; }
+                    if (list.n == 0) {
+                        break;
+                    }
                     list.dequeueBack();
                     break;
 
